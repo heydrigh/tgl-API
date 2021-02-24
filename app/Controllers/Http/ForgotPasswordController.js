@@ -59,5 +59,4 @@ class ForgotPasswordController {
   }
 }
 
-
 module.exports = ForgotPasswordController

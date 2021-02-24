@@ -4,7 +4,7 @@ const User = use('App/Models/User')
 const Database = use('Database')
 
 class UserController {
-  async store ({request}) {
+  async store ({ request }) {
     const data = request.only(['username', 'email', 'password'])
 
     const trx = await Database.beginTransaction()
