@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Game extends Model {
   type () {
-    return this.hasOne('App/Models/Type')
+    return this.belongsTo('App/Models/Type')
   }
 
   user () {

@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Type extends Model {
   games () {
-    return this.belongsTo('App/Models/Game')
+    return this.hasMany('App/Models/Game')
   }
 }
 
