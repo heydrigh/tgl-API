@@ -1,0 +1,24 @@
+<strong>Novo jogo criado</strong>
+
+<p>olá {{username}}! </p>
+
+<p>Você comprou um novo jogo!</p>
+
+<table>
+  <tr>
+    <th>Loteria</th>
+    <th>Números</th>
+    <th>Preço</th>
+  </tr>
+
+  <tr>
+    @each((game_type, price, numbers) in details)
+    <td>{{game_type}}</td>
+    <td>{{price}}</td>
+    <td>{{numbers}}</td>
+    @endeach
+  </tr>
+
+</table>
+
+

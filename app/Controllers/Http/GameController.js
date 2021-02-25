@@ -3,6 +3,7 @@
 
 const Game = use('App/Models/Game')
 const Type = use('App/Models/Type')
+const Mail = use('Mail')
 
 class GameController {
   async index ({ auth }) {
@@ -13,18 +14,28 @@ class GameController {
   }
 
   async store ({ request, response, auth }) {
-    const data = request.only(['type_id', 'numbers'])
-    console.log(data)
+    const data = request.only(['game_array'])
+    const user = auth.user
+    const games = (data.game_array)
+    let details = {}
 
-    const type = await Type.find(data.type_id)
-    if (!type) {
-      throw new Error('Type does not exist', 404)
-    }
-    data.user_id = auth.user.id
-    data.price = type.price
+    const gameMap = games.map(async game => {
+      const type = await Type.findOrFail(game.type_id)
+      game.user_id = auth.user.id
 
-    const game = await Game.create(data)
-    return game
+      game.price = type.price
+
+      game.name = type.type
+
+      details = { ...details, game }
+      return details
+      // const gamedone = await Game.create(game)
+      // return gamedone
+    })
+    const fullDetails = await Promise.all(gameMap)
+
+    console.log(fullDetails)
+    console.log(user)
   }
 
   async show ({ params, request, response, view }) {

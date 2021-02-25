@@ -24,7 +24,7 @@ class GamesSchema extends Schema {
         .onDelete('CASCADE')
         .notNullable()
       table.string('numbers').notNullable()
-      table.float('price', 2).notNullable()
+      table.float('price').notNullable()
       table.timestamps()
     })
   }
