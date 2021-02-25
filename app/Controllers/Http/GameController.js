@@ -5,13 +5,10 @@ const Game = use('App/Models/Game')
 const Type = use('App/Models/Type')
 
 class GameController {
-  async index ({ params, request, response, view }) {
-    const { user_id } = request.get()
-    if (user_id) {
-      const games = await Game.query().where({ user_id }).with('user').with('type').fetch()
-      return games
-    }
-    const games = await Game.query().with('user').with('type').fetch()
+  async index ({ auth }) {
+    const user_id = auth.user.id
+
+    const games = await Game.query().where({ user_id }).with('user').with('type').fetch()
     return games
   }
 
