@@ -22,6 +22,7 @@ class GameController {
 
     const gameMap = games.map(async game => {
       const type = await Type.findOrFail(game.type_id)
+
       game.user_id = auth.user.id
 
       game.price = type.price
@@ -31,6 +32,16 @@ class GameController {
       totalprice = totalprice + game.price
 
       details = { ...details, game }
+
+      const numbersToArray = game.numbers.split(',')
+
+      const checkIfDuplicate = array => {
+        return array.length !== new Set(array).size
+      }
+
+      if (checkIfDuplicate(numbersToArray)) {
+        throw new Error('You can repeat the numbers in a single game')
+      }
 
       const gamedone = await Game.create(game)
 
