@@ -23,6 +23,7 @@ class GamesSchema extends Schema {
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
         .notNullable()
+      table.string('name').notNullable()
       table.string('numbers').notNullable()
       table.float('price').notNullable()
       table.timestamps()

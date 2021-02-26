@@ -11,14 +11,17 @@
     <th>Preço</th>
   </tr>
 
+  <h3>Abaixo estão os detalhes de sua compra!</h3>
+
+  @each(detail in fullDetails)
   <tr>
-    @each((game_type, price, numbers) in details)
-    <td>{{game_type}}</td>
-    <td>{{price}}</td>
-    <td>{{numbers}}</td>
-    @endeach
+    <td>{{detail.name}}</td>
+    <td>{{detail.numbers}}</td>
+    <td>{{detail.price}}</td>
   </tr>
+  @endeach
 
 </table>
+<h4>E um total de R$: {{totalCart}}</h4>
 
 

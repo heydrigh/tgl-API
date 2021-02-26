@@ -18,6 +18,7 @@ class GameController {
     const user = auth.user
     const games = (data.game_array)
     let details = {}
+    let totalprice = 0
 
     const gameMap = games.map(async game => {
       const type = await Type.findOrFail(game.type_id)
@@ -27,15 +28,28 @@ class GameController {
 
       game.name = type.type
 
+      totalprice = totalprice + game.price
+
       details = { ...details, game }
-      return details
-      // const gamedone = await Game.create(game)
-      // return gamedone
+
+      const gamedone = await Game.create(game)
+
+      return gamedone
     })
     const fullDetails = await Promise.all(gameMap)
 
-    console.log(fullDetails)
-    console.log(user)
+    const totalCart = totalprice
+
+    await Mail.send(
+      ['emails.new_game'],
+      { username: user.username, fullDetails, totalCart },
+      message => {
+        message
+          .to(user.email)
+          .from('heydrigh@mail.com', 'Heydrigh')
+          .subject('Novo jogo')
+      }
+    )
   }
 
   async show ({ params, request, response, view }) {
