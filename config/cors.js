@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 module.exports = {
   /*
@@ -29,7 +29,7 @@ module.exports = {
   | Array - An array of allowed methods
   |
   */
-  methods: ['GET', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
 
   /*
   |--------------------------------------------------------------------------
@@ -62,7 +62,7 @@ module.exports = {
   | Array - An array of allowed headers
   |
   */
-  exposeHeaders: false,
+  exposeHeaders: true,
 
   /*
   |--------------------------------------------------------------------------
@@ -73,7 +73,7 @@ module.exports = {
   | boolean.
   |
   */
-  credentials: false,
+  credentials: true,
 
   /*
   |--------------------------------------------------------------------------
@@ -83,5 +83,5 @@ module.exports = {
   | Define Access-Control-Allow-Max-Age
   |
   */
-  maxAge: 90
-}
+  maxAge: 90,
+};

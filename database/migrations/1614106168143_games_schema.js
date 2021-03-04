@@ -25,6 +25,7 @@ class GamesSchema extends Schema {
         .notNullable()
       table.string('name').notNullable()
       table.string('numbers').notNullable()
+      table.string('color').notNullable()
       table.float('price').notNullable()
       table.timestamps()
     })

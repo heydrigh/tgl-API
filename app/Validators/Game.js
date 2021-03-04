@@ -7,8 +7,8 @@ class Game {
 
   get rules () {
     return {
-      'game_array.*.type_id': 'required',
-      'game_array.*.numbers': 'required'
+      '*.*.type_id': 'required',
+      '*.*.numbers': 'required'
     }
   }
 }

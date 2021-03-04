@@ -9,14 +9,17 @@ class GameController {
   async index ({ auth }) {
     const user_id = auth.user.id
 
-    const games = await Game.query().where({ user_id }).with('user').with('type').fetch()
+    const games = await Game.query().where({ user_id }).fetch()
     return games
   }
 
   async store ({ request, response, auth }) {
-    const data = request.only(['game_array'])
+    const data = request.all()
+
     const user = auth.user
-    const games = (data.game_array)
+    const games = (Object.values(data))
+    console.log(games)
+
     let details = {}
     let totalprice = 0
 
@@ -29,6 +32,8 @@ class GameController {
 
       game.name = type.type
 
+      game.color = type.color
+
       totalprice = totalprice + game.price
 
       details = { ...details, game }
@@ -40,7 +45,7 @@ class GameController {
       }
 
       if (checkIfDuplicate(numbersToArray)) {
-        throw new Error('You can repeat the numbers in a single game')
+        throw new Error('You cannot repeat the numbers in a single game')
       }
 
       const gamedone = await Game.create(game)

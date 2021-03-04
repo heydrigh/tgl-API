@@ -15,6 +15,24 @@ class UserController {
 
     return user
   }
+
+  async update ({ request, response, params, auth }) {
+    const data = request.only(['username', 'password'])
+    const user = auth.user
+
+    console.log(data)
+
+    if (data.username) {
+      user.username = data.username
+    }
+
+    if (data.password) {
+      user.password = data.password
+    }
+
+    await user.save()
+    return user
+  }
 }
 
 module.exports = UserController
